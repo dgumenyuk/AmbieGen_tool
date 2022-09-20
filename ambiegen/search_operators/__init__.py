@@ -1,7 +1,7 @@
-from vehicle_crossover import VehicleCrossover
-from vehicle_mutation import VehicleMutation
-from robot_crossover import RobotCrossover
-from robot_mutation import RobotMutation
+from ambiegen.search_operators.vehicle_crossover import VehicleCrossover
+from ambiegen.search_operators.vehicle_mutation import VehicleMutation
+from ambiegen.search_operators.robot_crossover import RobotCrossover
+from ambiegen.search_operators.robot_mutation import RobotMutation
 
 OPERATORS = {
     'vehicle_crossover': VehicleCrossover,

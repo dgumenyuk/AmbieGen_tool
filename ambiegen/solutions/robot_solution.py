@@ -1,9 +1,9 @@
 
 
 import config as cf
-from utils.robot_map import Map
+from ambiegen.utils.robot_map import Map
 import matplotlib.pyplot as plt
-from utils.a_star import AStarPlanner
+from ambiegen.utils.a_star import AStarPlanner
 from shapely.geometry import  LineString
 import time
 class RobotSolution:

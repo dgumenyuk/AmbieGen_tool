@@ -1,6 +1,6 @@
 import numpy as np
 from pymoo.core.crossover import Crossover
-from solutions import RobotSolution
+from ambiegen.solutions import RobotSolution
 import random as rm
 
 class RobotCrossover(Crossover):

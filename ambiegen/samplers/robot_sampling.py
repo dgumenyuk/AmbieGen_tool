@@ -9,17 +9,15 @@ def generate_random_solution():
     map_size = cf.robot_env["map_size"]
     min_len = cf.robot_env["min_len"]
     max_len = cf.robot_env["max_len"]
-    step_pos = cf.robot_env["pos_step"]
-    step_len = cf.robot_env["len_step"]
 
     min_pos = 1
     max_pos = map_size - 1
 
     len_values = [
-        i for i in range(min_len, max_len + 1, step_len)
+        i for i in range(min_len, max_len + 1, 1)
     ]  # a list of distance to go forward
     pos_values = [
-        i for i in range(min_pos, max_pos + 1, step_pos)
+        i for i in range(min_pos, max_pos + 1, 1)
     ]  # a list of angles to turn
 
     states = []

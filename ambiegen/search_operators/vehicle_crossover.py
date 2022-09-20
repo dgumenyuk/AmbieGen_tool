@@ -1,7 +1,7 @@
 
 import numpy as np
 from pymoo.core.crossover import Crossover
-from solutions import VehicleSolution
+from ambiegen.solutions import VehicleSolution
 import random as rm
 
 class VehicleCrossover(Crossover):

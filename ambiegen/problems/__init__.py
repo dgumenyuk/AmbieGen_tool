@@ -3,8 +3,8 @@ from ambiegen.problems.vehicle_problem import VehicleProblem1Obj, VehicleProblem
 
 
 PROBLEMS = {
-    "vehicle_1_obj": VehicleProblem1Obj,
-    "vehicle_2_obj": VehicleProblem2Obj,
-    "robot_1_obj": RobotProblem1Obj,
-    "robot_2_obj": RobotProblem2Obj
+    "vehicle_ga": VehicleProblem1Obj,
+    "vehicle_nsga2": VehicleProblem2Obj,
+    "robot_ga": RobotProblem1Obj,
+    "robot_nsga2": RobotProblem2Obj
 }

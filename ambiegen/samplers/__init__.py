@@ -4,7 +4,7 @@ from ambiegen.samplers.vehicle_sampling import VehicleSampling
 
 
 SAMPLERS = {
-    "vehicle": RobotSampling,
-    "robot": VehicleSampling,
+    "vehicle": VehicleSampling,
+    "robot": RobotSampling,
 
 }

@@ -1,6 +1,6 @@
 
-from robot_solution import RobotSolution
-from vehicle_solution import VehicleSolution
+from ambiegen.solutions.robot_solution import RobotSolution
+from ambiegen.solutions.vehicle_solution import VehicleSolution
 
 SOLUTIONS = {
     'robot': RobotSolution,

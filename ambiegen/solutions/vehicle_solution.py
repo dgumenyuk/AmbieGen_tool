@@ -1,7 +1,7 @@
 
-from utils.vehicle2 import Car
+from ambiegen.utils.vehicle2 import Car
 import config as cf
-from utils.car_road import Map
+from ambiegen.utils.car_road import Map
 
 class VehicleSolution:
 

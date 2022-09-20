@@ -10,10 +10,9 @@ from ambiegen.utils.random_seed import get_random_seed
 from pymoo.termination import get_termination   
 
 def main(problem, algo, runs_number):
-    print("Hello World") 
 
     algorithm =  ALRGORITHMS[algo](
-        n_offsprings=cf.ga["n_offsprings"],
+        #n_offsprings=cf.ga["n_offsprings"],
         pop_size=cf.ga["pop_size"],
         sampling = SAMPLERS[problem](),
         crossover = OPERATORS[problem + "_crossover"](cf.ga["cross_rate"]),
@@ -25,7 +24,7 @@ def main(problem, algo, runs_number):
     seed = get_random_seed()
 
     res = minimize(
-            PROBLEMS[problem](),
+            PROBLEMS[problem+"_"+algo](),
             algorithm,
             termination,
             seed=seed,
