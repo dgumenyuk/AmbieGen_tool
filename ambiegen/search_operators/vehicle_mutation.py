@@ -5,9 +5,10 @@ import config as cf
 
 
 class VehicleMutation(Mutation):
-    '''
+    """
     Module to perform the mutation
-    '''
+    """
+
     def __init__(self, mut_rate):
         super().__init__()
         self.mut_rate = mut_rate
@@ -29,7 +30,6 @@ class VehicleMutation(Mutation):
                 # exchnage mutation operator, exchange two random states
                 if wr < 0.5:
 
-
                     candidates = list(np.random.randint(0, high=len(child), size=2))
                     temp = child[candidates[0]]
                     child[candidates[0]] = child[(candidates[1])]
@@ -40,31 +40,23 @@ class VehicleMutation(Mutation):
                     num = np.random.randint(0, high=len(child))
 
                     if child[(num)][0] == 0:
-                        child[(num)][0] = np.random.choice(
-                            [1, 2]
-                        )
+                        child[(num)][0] = np.random.choice([1, 2])
 
                     elif child[(num)][0] == 1:
-                        child[(num)][0] = np.random.choice(
-                            [0, 2]
-                        )
+                        child[(num)][0] = np.random.choice([0, 2])
                     elif child[(num)][0] == 2:
-                        child[(num)][0] = np.random.choice(
-                            [0, 1]
-                        )
+                        child[(num)][0] = np.random.choice([0, 1])
 
                     if child[(num)][0] == 0:
                         value_list = np.arange(
                             cf.vehicle_env["min_len"], cf.vehicle_env["max_len"], 1
                         )
-                        child[num][1] = int(
-                        np.random.choice(value_list))
+                        child[num][1] = int(np.random.choice(value_list))
                     else:
                         value_list = np.arange(
-                        cf.vehicle_env["min_angle"], cf.vehicle_env["max_angle"], 5
+                            cf.vehicle_env["min_angle"], cf.vehicle_env["max_angle"], 5
                         )
-                        child[num][2] = int(
-                        np.random.choice(value_list))
+                        child[num][2] = int(np.random.choice(value_list))
 
                 sn.states = child
 

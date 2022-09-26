@@ -17,7 +17,7 @@ class RobotCrossover(Crossover):
         # The output owith the shape (n_offsprings, n_matings, n_var)
 
         Y = np.full_like(X, None, dtype=np.object)
-        
+
         # for each mating provided
 
         for k in range(n_matings):
@@ -31,18 +31,18 @@ class RobotCrossover(Crossover):
 
                     tc_a = s_a.states
                     tc_b = s_b.states
-                    
+
                     # select a random point to crossover
-                    crossover_point = rm.randint(1, len(tc_b)-1)
+                    crossover_point = rm.randint(1, len(tc_b) - 1)
 
                     off_a = RobotSolution()
                     off_b = RobotSolution()
 
                     # perform a one point crossover
 
-                    off_a.states[:crossover_point] = tc_a[:crossover_point] 
+                    off_a.states[:crossover_point] = tc_a[:crossover_point]
                     off_a.states[crossover_point:] = tc_b[crossover_point:]
-                    off_b.states[:crossover_point] = tc_b[:crossover_point] 
+                    off_b.states[:crossover_point] = tc_b[:crossover_point]
                     off_b.states[crossover_point:] = tc_a[crossover_point:]
 
                     Y[0, k, 0], Y[1, k, 0] = off_a, off_b

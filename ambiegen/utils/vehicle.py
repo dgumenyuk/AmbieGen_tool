@@ -8,6 +8,8 @@ from shapely.geometry import LineString, Point
 from numpy.ma import arange
 
 import config as cf
+
+
 class Car:
     """
     Class to execute the simplified car model
@@ -24,10 +26,10 @@ class Car:
         """
         It takes a list of points (road) and returns a list of points (nodes) that are evenly spaced
         along the road
-        
+
         Args:
           road: a list of tuples, each tuple is a point on the road
-        
+
         Returns:
           A list of tuples.
         """
@@ -64,12 +66,12 @@ class Car:
     def get_distance(self, road, x, y):
         """
         > The function takes a road and a point and returns the distance from the point to the road
-        
+
         Args:
           road: a list of points that make up the road
           x: the x coordinate of the point
           y: the y-coordinate of the point
-        
+
         Returns:
           The distance between the point and the road.
         """
@@ -80,7 +82,7 @@ class Car:
         """
         The function takes the current x and y coordinates of the car, the current angle of the car, and the
         speed of the car, and returns the new x and y coordinates of the car after it has moved forward
-        
+
         Returns:
           nothing.
         """
@@ -95,7 +97,7 @@ class Car:
         The function takes the current x and y coordinates of the car, the current angle of the car, the
         speed of the car. It then calculates the angle the
         car needs to turn to make a right turn, and then calculates the new x and y coordinates of the car
-        
+
         Returns:
           nothing.
         """
@@ -113,7 +115,7 @@ class Car:
         The function takes the current x and y coordinates of the car, the current angle of the car, the
         speed of the car,  and returns the new x and y coordinates of
         the car after it has turned left
-        
+
         Returns:
           nothing.
         """
@@ -130,11 +132,11 @@ class Car:
     def get_angle(self, node_a, node_b):
         """
         It takes two points, and returns the angle between them
-        
+
         Args:
           node_a: The first node
           node_b: the node that is being rotated
-        
+
         Returns:
           The angle between the two nodes.
         """
@@ -148,17 +150,16 @@ class Car:
         else:
             return angle
 
-
     def execute_road(self, int_points):
         """
         The function takes in a list of points, and then creates a road from those points. It then
         "drives" the car along the road. The car is controlled by a simple algorithm
         that tries to keep the car as close to the road as possible. The fitness of the road is
         determined by how far the car is from the road at the end of the simulation
-        
+
         Args:
           int_points: the interpolated points of the road
-        
+
         Returns:
           The fitness and the coodinates of te total x and y values the car travelled
         """
@@ -191,7 +192,6 @@ class Car:
             self.final_dist = []
             self.distance = 0
 
-            
             mini_nodes1 = nodes[: round(len(nodes) / 2)]
             mini_nodes2 = nodes[round(len(nodes) / 2) :]
             if (len(mini_nodes1) < 2) or (len(mini_nodes2) < 2):
@@ -199,7 +199,6 @@ class Car:
             mini_road1 = LineString([(t[0], t[1]) for t in mini_nodes1])
             mini_road2 = LineString([(t[0], t[1]) for t in mini_nodes2])
             road_split = [mini_road1, mini_road2]
-
 
             init_pos = nodes[0]
             self.x = init_pos[0]
@@ -268,17 +267,18 @@ class Car:
 
         return fitness, [self.tot_x, self.tot_y]
 
+
 def point_in_range(a):
     """
     If the point is within 4 units of the edge of the map, return False. Otherwise, return True
-    
+
     Args:
       a: the point to be checked
-    
+
     Returns:
       a boolean value.
     """
-    map_size = cf.model['map_size']
+    map_size = cf.model["map_size"]
     if ((4) < a[0] and a[0] < (map_size - 4)) and (
         (4) <= a[1] and a[1] < (map_size - 4)
     ):
@@ -291,32 +291,37 @@ def is_invalid_road(points):
     """
     If the road is not simple, or if the road is too sharp, or if the road has less than 3 points, or if
     the last point is not in range, then the road is invalid
-    
+
     Args:
       points: a list of points that make up the road
-    
+
     Returns:
       A boolean value.
     """
     nodes = [[p[0], p[1]] for p in points]
-        #intp = self.interpolate_road(the_test.road_points)
+    # intp = self.interpolate_road(the_test.road_points)
 
     in_range = point_in_range(points[-1])
 
     road = LineString([(t[0], t[1]) for t in nodes])
-    invalid = (road.is_simple is False) or (is_too_sharp(_interpolate(nodes))) or (len(points) < 3) or (in_range is False)
+    invalid = (
+        (road.is_simple is False)
+        or (is_too_sharp(_interpolate(nodes)))
+        or (len(points) < 3)
+        or (in_range is False)
+    )
     return invalid
 
 
 def find_circle(p1, p2, p3):
     """
     The function takes three points and returns the radius of the circle that passes through them
-    
+
     Args:
       p1: the first point
       p2: the point that is the center of the circle
       p3: the point that is the furthest away from the line
-    
+
     Returns:
       The radius of the circle.
     """
@@ -341,11 +346,11 @@ def min_radius(x, w=5):
     """
     It takes a list of points (x) and a window size (w) and returns the minimum radius of curvature of
     the line segment defined by the points in the window
-    
+
     Args:
       x: the x,y coordinates of the points
       w: window size. Defaults to 5
-    
+
     Returns:
       The minimum radius of curvature of the road.
     """
@@ -367,10 +372,10 @@ def min_radius(x, w=5):
 def _interpolate(the_test):
     """
     It takes a list of 2D points and returns a list of 4D points
-    
+
     Args:
       the_test: The list of points that define the road.
-    
+
     Returns:
       A list of tuples.
     """
@@ -423,12 +428,12 @@ def _interpolate(the_test):
 def is_too_sharp(the_test, TSHD_RADIUS=47):
     """
     If the minimum radius of the test is greater than the TSHD_RADIUS, then the test is too sharp
-    
+
     Args:
       the_test: the input road topology
       TSHD_RADIUS: The radius of the circle that is used to check if the test is too sharp. Defaults to
     47
-    
+
     Returns:
       the boolean value of the check variable.
     """

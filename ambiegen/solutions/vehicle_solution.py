@@ -1,15 +1,16 @@
-
 from ambiegen.utils.vehicle import Car
 import config as cf
 from ambiegen.utils.car_road import Map
 import matplotlib.pyplot as plt
 
+
 class VehicleSolution:
 
-    '''
+    """
     This is a class to represent one individual of the genetic algorithm
     It also contains the methods to evaluate the fitness of the solution, novelty and build the image
-    '''
+    """
+
     def __init__(self):
 
         self.road_points = []
@@ -27,11 +28,11 @@ class VehicleSolution:
     def eval_fitness(self):
         """
         The function takes a list of states (self.states) and converts them to a list of points
-        (self.road_points). 
+        (self.road_points).
         The function then takes the list of points and interpolates them to create a list of interpolated
-        points (self.intp_points). 
+        points (self.intp_points).
         The function then takes the list of interpolated points and executes them with the simplified system model
-        The function then calculates the fitness of the individual. 
+        The function then calculates the fitness of the individual.
         Returns:
           The fitness of the individual.
         """
@@ -42,22 +43,22 @@ class VehicleSolution:
             self.fitness = 0
         else:
             self.intp_points = self.car.interpolate_road(road)
-            self.fitness, self.car_path = self.car.execute_road(self.intp_points) #evaluate(self.intp_points)#
+            self.fitness, self.car_path = self.car.execute_road(
+                self.intp_points
+            )  # evaluate(self.intp_points)#
 
         return self.fitness
 
-    
-    
-    #@staticmethod
+    # @staticmethod
     def compare_states(self, state1, state2):
         """
         If the two states are the same, then the similarity is 1. If the two states are different, then the
         similarity is 0
-        
+
         Args:
           state1: the first element to compare
           state2: the secoind element to compare
-        
+
         Returns:
           The similarity of the two states.
         """
@@ -73,31 +74,27 @@ class VehicleSolution:
 
         return similarity
 
-    
     def calculate_novelty(self, state1, state2):
-        '''
+        """
         novelty = calc_novelty(state1, state2, "vehicle")
         return -novelty
-        '''
-        
-        
+        """
+
         similarity = 0
         state_num = min(len(state1), len(state2))
-        
 
-        total_states = state_num*cf.vehicle_env["elem_types"]
+        total_states = state_num * cf.vehicle_env["elem_types"]
         for i in range(state_num):
             similarity += self.compare_states(state1[i], state2[i])
-        novelty = 1 - (similarity/total_states)
+        novelty = 1 - (similarity / total_states)
 
         return -novelty
-        
 
     @staticmethod
     def build_image(states, save_path="test.png"):
         """
         It takes a list of states, and plots the road and the car path
-        
+
         Args:
           states: a list of tuples, each tuple is a state of the car.
           save_path: The path to save the image to. Defaults to test.png
@@ -107,7 +104,7 @@ class VehicleSolution:
         road_points = map.get_points_from_states(states)
         speed = 9
         steer_ang = 12
-        car = Car(speed, steer_ang,  map_size)
+        car = Car(speed, steer_ang, map_size)
         intp_points = car.interpolate_road(road_points)
 
         fig, ax = plt.subplots(figsize=(12, 12))
@@ -117,7 +114,7 @@ class VehicleSolution:
         for p in intp_points:
             road_x.append(p[0])
             road_y.append(p[1])
-        
+
         fitness, car_path = car.execute_road(intp_points)
 
         if len(car_path):
@@ -128,9 +125,7 @@ class VehicleSolution:
         top = map_size
         bottom = 0
 
-        ax.set_title(
-            "Test case fitenss " + str(fitness), fontsize=17
-        )
+        ax.set_title("Test case fitenss " + str(fitness), fontsize=17)
 
         ax.set_ylim(bottom, top)
 
@@ -138,4 +133,3 @@ class VehicleSolution:
         ax.legend()
         fig.savefig(save_path)
         plt.close(fig)
- 

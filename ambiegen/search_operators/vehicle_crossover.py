@@ -1,4 +1,3 @@
-
 import numpy as np
 from pymoo.core.crossover import Crossover
 from ambiegen.solutions import VehicleSolution
@@ -6,9 +5,10 @@ import random as rm
 
 # this is the crossover operator for the vehicle problem
 class VehicleCrossover(Crossover):
-    '''
+    """
     Module to perform the crossover
-    '''
+    """
+
     def __init__(self, cross_rate):
         super().__init__(2, 2)
         self.cross_rate = cross_rate
@@ -46,9 +46,9 @@ class VehicleCrossover(Crossover):
 
                     # one point crossover
 
-                    offa.states[:crossover_point] = tc_a[:crossover_point] 
+                    offa.states[:crossover_point] = tc_a[:crossover_point]
                     offa.states[crossover_point:] = tc_b[crossover_point:]
-                    offb.states[:crossover_point] = tc_b[:crossover_point] 
+                    offb.states[:crossover_point] = tc_b[:crossover_point]
                     offb.states[crossover_point:] = tc_a[crossover_point:]
 
                 else:

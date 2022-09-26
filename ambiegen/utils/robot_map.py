@@ -1,16 +1,16 @@
- 
 from shapely.geometry import Point
 from shapely.geometry.polygon import Polygon
 import matplotlib.pyplot as plt
 import time
 import numpy as np
 
+
 class Map:
 
-    '''
-    This is a class to transform the input list of states into 2D points 
+    """
+    This is a class to transform the input list of states into 2D points
     on a map
-    '''
+    """
 
     def __init__(self, map_size):
         self.map_size = map_size
@@ -31,11 +31,11 @@ class Map:
     def create_init_box(self):
         """
         > The function creates a box around the map, which defines its borders
-        
+
         Returns:
           the map_size and the all_map_points.
         """
-        self.all_map_points[0][:]  = 0
+        self.all_map_points[0][:] = 0
         for i in range(1, self.map_size):
             self.all_map_points[i][0] = 0
             self.all_map_points[i][self.map_size - 1] = 0
@@ -48,11 +48,11 @@ class Map:
         """
         It takes in a distance and a position, and then it creates a horizontal line of points that are the
         same distance from the center position
-        
+
         Args:
           distance: the size of the horizontal object
           position: the x-coordinate of the center of the horizontal object
-        
+
         Returns:
           The new points that are being added to the map.
         """
@@ -78,13 +78,13 @@ class Map:
         """
         It takes in a distance and a position, and then it creates a vertical line of points that are the
         same distance from the center position
-        
+
         Args:
           distance: the size of the vertical object
           position: the x-coordinate of the center of the vertical object
-        
+
         Returns:
-          The new points 
+          The new points
         """
 
         new_points = []
@@ -107,10 +107,10 @@ class Map:
     def point_valid(self, point):
         """
         If the point is in the polygon or out of bounds, then it's not valid
-        
+
         Args:
           point: the point to be checked
-        
+
         Returns:
           a boolean value.
         """
@@ -120,38 +120,36 @@ class Map:
         else:
             return True
 
-
-    def point_out_of_bounds(self, a): 
+    def point_out_of_bounds(self, a):
         """
         If the point is within the bounds of the grid, return False. Otherwise, return True
-        
+
         Args:
           a: the point to be checked
-        
+
         Returns:
           a boolean value.
         """
         if (0 <= a[0] and a[0] < self.max_x) and (0 <= a[1] and a[1] < self.max_y):
             return False
         else:
-            #print("OUT OF BOUNDS {}".format(a))
+            # print("OUT OF BOUNDS {}".format(a))
             return True
-
 
     def in_polygon(self, a):
         """
         If the point is within 5 pixels of the top left corner or the bottom right corner, then it's in the
         polygon i.e in the prohibited area
-        
+
         Args:
           a: the current vector
         """
         thresh = 5
-        if (a[0] < thresh ) and (a[1] < thresh) :
-            #print("IN POLYGON1 {}".format(a))
+        if (a[0] < thresh) and (a[1] < thresh):
+            # print("IN POLYGON1 {}".format(a))
             return True
-        elif ((a[0] > self.max_x - thresh ) and (a[1] >  self.max_y - thresh)):
-            #print("IN POLYGON2  {}".format(a))
+        elif (a[0] > self.max_x - thresh) and (a[1] > self.max_y - thresh):
+            # print("IN POLYGON2  {}".format(a))
             return True
         else:
             return False
@@ -159,10 +157,10 @@ class Map:
     def get_points_cords(self, points):
         """
         It takes map points as a 2D matrix and returns the list of the actual coordinates of the points
-        
+
         Args:
           points: a list of lists of 0's and 1's. 0's are the points that are active.
-        
+
         Returns:
           A list of points that represent the robot obstalces.
         """
@@ -171,23 +169,21 @@ class Map:
             for j, point in enumerate(row):
                 if point == 0:
                     cords.append([j, i])
-    
-        return cords
 
+        return cords
 
     def get_points_from_states(self, states):
         """
         It takes a list states describing the map with obstacles and returns a list of points
-        
+
         Args:
           states: a list of all the states describing the obstacle map
-        
+
         Returns:
           The actual 2D matrix of the map.
         """
 
         self.current_level = 2
-
 
         self.create_init_box()
 
@@ -203,7 +199,3 @@ class Map:
             else:
                 print("ERROR")
         return self.all_map_points
-
-
-
-

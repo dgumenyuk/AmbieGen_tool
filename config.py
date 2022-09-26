@@ -19,8 +19,4 @@ robot_env = {
 }
 
 
-files = {
-    "stats_path": ".\\stats",
-    "tcs_path": ".\\tcs",
-    "images_path": ".\\images"
-}
+files = {"stats_path": ".\\stats", "tcs_path": ".\\tcs", "images_path": ".\\images"}

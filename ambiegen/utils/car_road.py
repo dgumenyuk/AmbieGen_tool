@@ -29,7 +29,7 @@ class Map:
 
         self.road_point = []
 
-        self.road_points_list = [[self.max_x/2, self.max_y/2]]
+        self.road_points_list = [[self.max_x / 2, self.max_y / 2]]
 
         self.scenario = []
 
@@ -39,17 +39,16 @@ class Map:
     def init_position(self):
         """
         It initializes the postion of the base vector to build the road
-        
+
         Returns:
           The positions of start and end ponts of the road topology.
         """
 
-
         pos = np.array((self.max_y / 2 - self.width / 2, self.max_y / 2))
         end = np.array((self.max_y / 2 + self.width / 2, self.max_y / 2))
 
-
         return pos, end
+
     '''
     def position_to_line(self, position):
         """
@@ -70,7 +69,7 @@ class Map:
         """
         It takes the current position of the car, which is a list of two points, and returns the center of
         those two points
-        
+
         Returns:
           The center of the road is being returned.
         """
@@ -92,10 +91,10 @@ class Map:
         """
         The function takes in the current position of the car, and the distance the car is supposed to
         move. It makes the parallel transition of the input vector at a given distance.
-        
+
         Args:
           distance: the distance the car will travel
-        
+
         Returns:
           a boolean value, True if the transformation was performed.
         """
@@ -141,7 +140,7 @@ class Map:
 
             self.current_pos = [p_a_, p_b_]
             self.all_position_list.append(self.current_pos)
-            #return True
+            # return True
         else:
             R = np.array([[0, -1], [1, 0]])
             u_v_ = R.dot(u_v)
@@ -156,7 +155,7 @@ class Map:
                 p_b_ = p_b + u_v * distance
                 self.current_pos = [p_a_, p_b_]
                 self.all_position_list.append(self.current_pos)
-                #return True
+                # return True
             else:
                 p_a_ = p_a + u_v_ * distance
                 p_b_ = p_b + u_v_ * distance
@@ -166,19 +165,19 @@ class Map:
         self.road_points_list.append(self.position_to_center())
         self.scenario.append([0, distance, 0])
         return True
+
     def get_sector(self):
         """returns the sector of initial position"""
 
         return 1
-    
 
     def turn_right(self, angle):
         """
         The function turns the base vector to the right by the angle specified in the argument
-        
+
         Args:
           angle: the angle of the turn
-        
+
         Returns:
           the new position of the vector after it has turned right.
         """
@@ -211,7 +210,6 @@ class Map:
 
         self.all_position_list.append(self.current_pos)
 
-        
         self.road_points_list.append(self.position_to_center())
         self.scenario.append([1, 0, angle])
         return True
@@ -219,10 +217,10 @@ class Map:
     def turn_left(self, angle):
         """
         The function takes in an angle and turns the vector to the left by that angle
-        
+
         Args:
           angle: the angle of the turn
-        
+
         Returns:
           the new position of the vector after it has turned left by the specified angle.
         """
@@ -254,15 +252,14 @@ class Map:
             self.current_pos = self.anticlockwise_turn_top(angle, p_a, p_b)
         self.all_position_list.append(self.current_pos)
 
-        
         self.road_points_list.append(self.position_to_center())
         self.scenario.append([2, 0, angle])
         return True
 
     def clockwise_turn_top(self, angle, p_a, p_b):
-        '''
+        """
         Turns the input vector clockwise by the angle specified in the argument
-        '''
+        """
         angle += 180
         radius = self.radius
 
@@ -387,16 +384,14 @@ class Map:
         )
         return polygon.contains(point)
 
-
-
     def get_points_from_states(self, states):
         """
         It takes a list of states, and for each state, it performs the action specified by the state, and
         then appends the resulting road points to a list
-        
+
         Args:
           states: a list of tuples, each tuple is (action, angle, distance)
-        
+
         Returns:
           The points of the road.
         """
@@ -406,20 +401,19 @@ class Map:
             action = state[0]
             if action == 0:
                 done = self.go_straight(state[1])
-                if not(done):
+                if not (done):
                     break
             elif action == 2:
                 done = self.turn_left(state[2])
-                if not(done):
+                if not (done):
                     break
             elif action == 1:
                 done = self.turn_right(state[2])
-                if not(done):
+                if not (done):
                     break
             else:
                 print("ERROR, invalid action")
 
         points = self.road_points_list[:-1]
-        self.road_points  = points
+        self.road_points = points
         return points
-
