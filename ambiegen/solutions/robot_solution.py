@@ -5,8 +5,6 @@ from ambiegen.utils.robot_map import Map
 import matplotlib.pyplot as plt
 from ambiegen.utils.a_star import AStarPlanner
 from shapely.geometry import  LineString
-from ambiegen.utils.calc_novelty import calc_novelty
-import time
 
 class RobotSolution:
     '''
@@ -56,8 +54,8 @@ class RobotSolution:
         return self.fitness
 
     
-    @staticmethod
-    def compare_states(state1, state2):
+
+    def compare_states(self, state1, state2):
         """
         This function compares two states and returns a similarity score
         
@@ -76,9 +74,20 @@ class RobotSolution:
         return similarity
 
     
-    def calc_novelty(self, old, new):
+    def calculate_novelty(self, state1, state2):
+        '''
         novelty  = calc_novelty(old, new, "robot")
         return -novelty
+        '''
+        similarity = 0
+        state_num = min(len(state1), len(state2))
+
+        total_states = state_num*cf.robot_env["elem_types"]
+        for i in range(state_num):
+            similarity += self.compare_states(state1[i], state2[i])
+
+        novelty = 1 - (similarity/total_states)
+        return novelty
 
     @staticmethod
     def build_image(states, save_path = "test.png"):

@@ -3,7 +3,6 @@ from ambiegen.utils.vehicle import Car
 import config as cf
 from ambiegen.utils.car_road import Map
 import matplotlib.pyplot as plt
-from ambiegen.utils.calc_novelty import calc_novelty
 
 class VehicleSolution:
 
@@ -46,9 +45,11 @@ class VehicleSolution:
             self.fitness, self.car_path = self.car.execute_road(self.intp_points) #evaluate(self.intp_points)#
 
         return self.fitness
+
     
-    @staticmethod
-    def compare_states(state1, state2):
+    
+    #@staticmethod
+    def compare_states(self, state1, state2):
         """
         If the two states are the same, then the similarity is 1. If the two states are different, then the
         similarity is 0
@@ -73,9 +74,24 @@ class VehicleSolution:
         return similarity
 
     
-    def calc_novelty(self, old, new):
-        novelty = calc_novelty(old, new, "vehicle")
+    def calculate_novelty(self, state1, state2):
+        '''
+        novelty = calc_novelty(state1, state2, "vehicle")
         return -novelty
+        '''
+        
+        
+        similarity = 0
+        state_num = min(len(state1), len(state2))
+        
+
+        total_states = state_num*cf.vehicle_env["elem_types"]
+        for i in range(state_num):
+            similarity += self.compare_states(state1[i], state2[i])
+        novelty = 1 - (similarity/total_states)
+
+        return -novelty
+        
 
     @staticmethod
     def build_image(states, save_path="test.png"):

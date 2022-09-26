@@ -17,7 +17,7 @@ def main(problem, algo, runs_number, save_results=True, save_images=True):
     #n_offsprings=cf.ga["n_offsprings"]
 
     algorithm =  ALRGORITHMS[algo](
-        n_offsprings=2,
+        #n_offsprings=2,
         pop_size=cf.ga["pop_size"],
         sampling = SAMPLERS[problem](),
         crossover = OPERATORS[problem + "_crossover"](cf.ga["cross_rate"]),
@@ -57,8 +57,8 @@ def main(problem, algo, runs_number, save_results=True, save_images=True):
 
 
 ################################## MAIN ########################################
-problem = "vehicle"
-algo = "ga"
+problem = "robot"
+algo = "nsga2"
 runs_number = 3
 if __name__ == '__main__':
     main(problem, algo, runs_number)

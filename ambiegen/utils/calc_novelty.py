@@ -14,7 +14,7 @@ def calc_novelty(state1, state2, problem):
     Returns:
       The novelty of the solution relative to the other solutions in the test suite.
     """
-
+    '''
     similarity = 0
     state_num = min(len(state1), len(state2))
     
@@ -27,4 +27,10 @@ def calc_novelty(state1, state2, problem):
         for i in range(state_num):
             similarity += RobotSolution.compare_states(state1[i], state2[i])
     novelty = 1 - (similarity/total_states)
+    '''
+    if problem == "vehicle":
+        novelty = abs(VehicleSolution().calculate_novelty(state1, state2))
+    elif problem == "robot":
+        novelty = abs(RobotSolution().calculate_novelty(state1, state2))
+        
     return novelty

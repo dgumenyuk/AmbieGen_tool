@@ -1,6 +1,6 @@
 import numpy as np
 from pymoo.core.sampling import Sampling
-from ambiegen.solutions import RobotSolution
+from ambiegen.solutions.robot_solution import RobotSolution
 from ambiegen.utils.robot_map import Map
 from ambiegen.utils.a_star import AStarPlanner
 import config as cf

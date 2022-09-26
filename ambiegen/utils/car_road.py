@@ -166,6 +166,11 @@ class Map:
         self.road_points_list.append(self.position_to_center())
         self.scenario.append([0, distance, 0])
         return True
+    def get_sector(self):
+        """returns the sector of initial position"""
+
+        return 1
+    
 
     def turn_right(self, angle):
         """

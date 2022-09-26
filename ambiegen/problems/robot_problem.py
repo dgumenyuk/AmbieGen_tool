@@ -25,7 +25,7 @@ class RobotProblem2Obj(ElementwiseProblem):
             best_scenarios = [top_solutions[i][0].states for i in range(len(top_solutions))]
             novelty_list = []
             for i in range(len(best_scenarios)):
-                nov = s.calc_novelty(best_scenarios[i], s.states)
+                nov = s.calculate_novelty(best_scenarios[i], s.states)
                 novelty_list.append(nov)
             s.novelty = sum(novelty_list)/len(novelty_list)
 
