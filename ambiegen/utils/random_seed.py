@@ -2,6 +2,13 @@
 import time
 
 def get_random_seed():
+    """
+    It takes the current time in milliseconds, and then does some bitwise operations to get a random
+    seed
+    
+    Returns:
+      The seed is being returned.
+    """
     t = int(time.time() * 1000)
     seed = (
         ((t & 0xFF000000) >> 24)

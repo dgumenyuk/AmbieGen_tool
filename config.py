@@ -1,7 +1,8 @@
-ga = {"pop_size": 150, "n_gen": 100, "mut_rate": 0.4, "cross_rate": 1}
+ga = {"pop_size": 50, "n_gen": 10, "mut_rate": 0.4, "cross_rate": 1}
 
 vehicle_env = {
     "map_size": 200,
+    "elem_types": 3,
     "min_len": 5,  # minimal possible distance in meters
     "max_len": 30,  # maximal possible disance to go straight in meters
     "min_angle": 10,  # minimal angle of rotation in degrees
@@ -9,7 +10,8 @@ vehicle_env = {
 }
 
 robot_env = {
-    "map_size": 40,  # 50,
+    "map_size": 40,
+    "elem_types": 2,
     "min_len": 8,  # 3,  # minimal possible distance in meters
     "max_len": 15,  # 12,#15,  # maximal possible disance to go straight in meters
     "min_pos": 1,  # minimal possible
@@ -18,8 +20,7 @@ robot_env = {
 
 
 files = {
-    "ga_archive": ".\\GA_archive\\",
-    "tc_img": ".\\TC_img\\",
-    "tc_file": ".\\TC_file\\",
-    "ga_conv": ".\\GA_conv\\",
+    "stats_path": ".\\stats",
+    "tcs_path": ".\\tcs",
+    "images_path": ".\\images"
 }

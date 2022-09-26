@@ -16,7 +16,7 @@ class VehicleMutation(Mutation):
         for i in range(len(X)):
             r = np.random.random()
             s = X[i, 0]
-            # with a probabilty of 40% - change the order of characters
+            # with a given probability - perform the mutation
             if r < self.mut_rate:
 
                 sn = copy.deepcopy(s)
@@ -25,15 +25,18 @@ class VehicleMutation(Mutation):
                 child = sn.states
 
                 old_states = child
+
+                # exchnage mutation operator, exchange two random states
                 if wr < 0.5:
-                    #print("change order")
+
 
                     candidates = list(np.random.randint(0, high=len(child), size=2))
                     temp = child[candidates[0]]
                     child[candidates[0]] = child[(candidates[1])]
                     child[(candidates[1])] = temp
+
+                # change of value operator, change the value of one of the attributes of a random state
                 else:
-                    #print("change one character")
                     num = np.random.randint(0, high=len(child))
 
                     if child[(num)][0] == 0:

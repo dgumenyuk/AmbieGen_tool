@@ -37,35 +37,47 @@ class Map:
         self.all_position_list = [[self.init_pos, self.init_end]]
 
     def init_position(self):
-        """select a random initial position from the middle of
-        one of the boundaries
+        """
+        It initializes the postion of the base vector to build the road
+        
+        Returns:
+          The positions of start and end ponts of the road topology.
         """
 
+
         pos = np.array((self.max_y / 2 - self.width / 2, self.max_y / 2))
-        # end = np.array((pos[0], pos[1] - self.width))
         end = np.array((self.max_y / 2 + self.width / 2, self.max_y / 2))
 
 
         return pos, end
-
+    '''
     def position_to_line(self, position):
+        """
+        It takes a list of two points and returns a list of three points
+        
+        Args:
+          position: the position of the line, which is a list of two points.
+        
+        Returns:
+          The x and y coordinates of the line.
+        """
         x = [position[0][0], position[1][0], (position[0][0] + position[1][0]) / 2]
         y = [position[0][1], position[1][1], (position[0][1] + position[1][1]) / 2]
         return x, y
+    '''
 
     def position_to_center(self):
+        """
+        It takes the current position of the car, which is a list of two points, and returns the center of
+        those two points
+        
+        Returns:
+          The center of the road is being returned.
+        """
         x = (self.current_pos[0][0] + self.current_pos[1][0]) / 2
         y = (self.current_pos[0][1] + self.current_pos[1][1]) / 2
         self.road_point = [x, y]
         return [x, y]
-
-    def point_in_range2(self, a):
-        """check if point is in the acceptable range"""
-        # print("Point check", a)
-        if 4 <= a[0] < (self.max_x - 4) and 4 <= a[1] < (self.max_y - 4):
-            return 1
-        else:
-            return 0
 
     def point_in_range(self, a):
         """check if point is in the acceptable range"""
@@ -77,6 +89,16 @@ class Map:
             return 0
 
     def go_straight(self, distance):
+        """
+        The function takes in the current position of the car, and the distance the car is supposed to
+        move. It makes the parallel transition of the input vector at a given distance.
+        
+        Args:
+          distance: the distance the car will travel
+        
+        Returns:
+          a boolean value, True if the transformation was performed.
+        """
         a = self.current_pos[0]
         b = self.current_pos[1]
 
@@ -146,6 +168,15 @@ class Map:
         return True
 
     def turn_right(self, angle):
+        """
+        The function turns the base vector to the right by the angle specified in the argument
+        
+        Args:
+          angle: the angle of the turn
+        
+        Returns:
+          the new position of the vector after it has turned right.
+        """
         a = self.current_pos[0]
         b = self.current_pos[1]
         test_angle = 3
@@ -181,6 +212,15 @@ class Map:
         return True
 
     def turn_left(self, angle):
+        """
+        The function takes in an angle and turns the vector to the left by that angle
+        
+        Args:
+          angle: the angle of the turn
+        
+        Returns:
+          the new position of the vector after it has turned left by the specified angle.
+        """
         a = self.current_pos[0]
         b = self.current_pos[1]
         test_angle = 3
@@ -215,6 +255,9 @@ class Map:
         return True
 
     def clockwise_turn_top(self, angle, p_a, p_b):
+        '''
+        Turns the input vector clockwise by the angle specified in the argument
+        '''
         angle += 180
         radius = self.radius
 
@@ -243,6 +286,9 @@ class Map:
         return [p_a_, p_b_]
 
     def clockwise_turn_bot(self, angle, p_a, p_b):
+        """
+        Turns the input vector clockwise by the angle specified in the argument
+        """
         radius = self.radius
         u_v = (p_a - p_b) / np.linalg.norm(p_a - p_b)
         o_o = p_b - u_v * radius
@@ -266,6 +312,8 @@ class Map:
         return [p_a_, p_b_]
 
     def anticlockwise_turn_top(self, angle, p_a, p_b):
+        """
+        Turns the input vector anticlockwise by the angle specified in the argument"""
         angle += 180
         radius = self.radius
         u_v = (p_a - p_b) / np.linalg.norm(p_a - p_b)
@@ -293,6 +341,8 @@ class Map:
         return [p_a_, p_b_]
 
     def anticlockwise_turn_bot(self, angle, p_a, p_b):
+        """
+        Turns the input vector anticlockwise by the angle specified in the argument"""
         radius = self.radius
         u_v = (p_a - p_b) / np.linalg.norm(p_a - p_b)
         o_o = p_b - u_v * radius
@@ -332,115 +382,39 @@ class Map:
         )
         return polygon.contains(point)
 
-    def get_sector(self):
-        """returns the sector of initial position"""
-
-        return 1
-
-    def remove_invalid_cases(self, points, states):
-        points = list(points)
-        new_list = [points[0]]
-        new_states = {}
-        # print("ALL points", points)
-        i = 1
-        while i < len(points):
-            if self.point_in_range_2(points[i]) == 1:
-                new_list.append(points[i])
-                new_states["st" + str(i - 1)] = states["st" + str(i - 1)]
-            else:
-                return new_states, new_list
-            i += 1
-
-        return new_states, new_list
 
 
     def get_points_from_states(self, states):
+        """
+        It takes a list of states, and for each state, it performs the action specified by the state, and
+        then appends the resulting road points to a list
+        
+        Args:
+          states: a list of tuples, each tuple is (action, angle, distance)
+        
+        Returns:
+          The points of the road.
+        """
 
-        self.init_pos, self.init_end = self.init_position()
-        self.current_pos = [self.init_pos, self.init_end]
-        self.all_position_list = [[self.init_pos, self.init_end]]
-
-        self.position_to_center()
-        points = [self.road_point]
         tc = states
         for state in tc:
-            action = tc[state]["state"]
-            if action == "straight":
-                if self.go_straight(tc[state]["value"]) == True:
-                    self.position_to_center()
-                    point = self.road_point
-                    points.append(point)
-            elif action == "left":
-                if self.turn_left(tc[state]["value"]) == True:
-                    self.position_to_center()
-                    point = self.road_point
-                    points.append(point)
-            elif action == "right":
-                if self.turn_right(tc[state]["value"]) == True:
-                    self.position_to_center()
-                    point = self.road_point
-                    points.append(point)
+            action = state[0]
+            if action == 0:
+                done = self.go_straight(state[1])
+                if not(done):
+                    break
+            elif action == 2:
+                done = self.turn_left(state[2])
+                if not(done):
+                    break
+            elif action == 1:
+                done = self.turn_right(state[2])
+                if not(done):
+                    break
             else:
-                print("ERROR")
+                print("ERROR, invalid action")
+
+        points = self.road_points_list[:-1]
+        self.road_points  = points
         return points
 
-    def build_tc(self, points):
-
-        time_ = str((time.time()))
-
-        fig, ax = plt.subplots(figsize=(12, 12))
-        # , nodes[closest_index][0], nodes[closest_index][1], 'go'
-        road_x = []
-        road_y = []
-        for p in points:
-            road_x.append(p[0])
-            road_y.append(p[1])
-
-        ax.plot(road_x, road_y, "yo--", label="Road")
-        #ax.plot(points, "ro", label="Road")
-
-        top = self.map_size
-        bottom = 0
-
-        ax.set_title("Test case fitenss ", fontsize=17)
-
-        ax.set_ylim(bottom, top)
-
-        ax.set_xlim(bottom, top)
-
-        fig.savefig(".\\Test\\" + time_ + "test.jpg")
-        ax.legend()
-        plt.close(fig)
-
-
-def read_schedule(tc, size):
-    time_ = str(int(time.time()))
-    fig, ax1 = plt.subplots(figsize=(12, 12))
-    car_map = Map(size)
-    for state in tc:
-        action = tc[state]["state"]
-        print("location:", car_map.current_pos)
-        if action == "straight":
-            car_map.go_straight(tc[state]["value"])
-            print(tc[state]["value"])
-            x, y = car_map.position_to_line(car_map.current_pos)
-            ax1.plot(x, y, "o--y")
-        elif action == "left":
-            car_map.turn_left(tc[state]["value"])
-            print(tc[state]["value"])
-            x, y = car_map.position_to_line(car_map.current_pos)
-            ax1.plot(x, y, "o--y")
-        elif action == "right":
-            car_map.turn_right(tc[state]["value"])
-            print(tc[state]["value"])
-            x, y = car_map.position_to_line(car_map.current_pos)
-            ax1.plot(x, y, "o--y")
-        else:
-            print("Wrong value")
-
-    top = size
-    bottom = 0
-    ax1.set_ylim(bottom, top)
-    ax1.set_xlim(bottom, top)
-    fig.savefig(".\\Test\\" + time_ + "+test2.jpg")
-    plt.close(fig)

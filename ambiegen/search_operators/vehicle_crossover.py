@@ -4,6 +4,7 @@ from pymoo.core.crossover import Crossover
 from ambiegen.solutions import VehicleSolution
 import random as rm
 
+# this is the crossover operator for the vehicle problem
 class VehicleCrossover(Crossover):
     '''
     Module to perform the crossover
@@ -30,6 +31,7 @@ class VehicleCrossover(Crossover):
                 tc_a = s_a.states
                 tc_b = s_b.states
 
+                # get the crossover point
                 if len(tc_a) < len(tc_b):
                     crossover_point = rm.randint(1, len(tc_a) - 1)
                 elif len(tc_b) < len(tc_a):
@@ -37,7 +39,7 @@ class VehicleCrossover(Crossover):
                 else:
                     crossover_point = rm.randint(1, len(tc_a) - 1)
 
-                if s_a.n_states > 2 and s_b.n_states > 2:
+                if len(s_a.states) > 2 and len(s_b.states) > 2:
 
                     offa = VehicleSolution()
                     offb = VehicleSolution()

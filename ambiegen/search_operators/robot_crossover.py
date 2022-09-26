@@ -3,6 +3,7 @@ from pymoo.core.crossover import Crossover
 from ambiegen.solutions import RobotSolution
 import random as rm
 
+# this is the crossover operator for the robot problem
 class RobotCrossover(Crossover):
     def __init__(self, cross_rate):
 
@@ -31,10 +32,13 @@ class RobotCrossover(Crossover):
                     tc_a = s_a.states
                     tc_b = s_b.states
                     
-                    crossover_point = rm.randint(0, len(tc_b)-1)
+                    # select a random point to crossover
+                    crossover_point = rm.randint(1, len(tc_b)-1)
 
                     off_a = RobotSolution()
                     off_b = RobotSolution()
+
+                    # perform a one point crossover
 
                     off_a.states[:crossover_point] = tc_a[:crossover_point] 
                     off_a.states[crossover_point:] = tc_b[crossover_point:]
