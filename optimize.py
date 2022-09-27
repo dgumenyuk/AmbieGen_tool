@@ -15,10 +15,10 @@ from ambiegen.utils.save_tcs_images import save_tcs_images
 
 
 def main(problem, algo, runs_number, save_results=True, save_images=True):
-    # n_offsprings=cf.ga["n_offsprings"]
+
 
     algorithm = ALRGORITHMS[algo](
-        # n_offsprings=2,
+        n_offsprings=40,
         pop_size=cf.ga["pop_size"],
         sampling=SAMPLERS[problem](),
         crossover=OPERATORS[problem + "_crossover"](cf.ga["cross_rate"]),

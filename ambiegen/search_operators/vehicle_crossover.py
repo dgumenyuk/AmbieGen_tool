@@ -50,11 +50,14 @@ class VehicleCrossover(Crossover):
                     offa.states[crossover_point:] = tc_b[crossover_point:]
                     offb.states[:crossover_point] = tc_b[:crossover_point]
                     offb.states[crossover_point:] = tc_a[crossover_point:]
+                    
+                    Y[0, k, 0], Y[1, k, 0] = offa, offb
 
                 else:
                     print("Not enough states!")
+                    Y[0, k, 0], Y[1, k, 0] = s_a, s_b
 
-                Y[0, k, 0], Y[1, k, 0] = offa, offb
+                
 
             else:
                 Y[0, k, 0], Y[1, k, 0] = s_a, s_b

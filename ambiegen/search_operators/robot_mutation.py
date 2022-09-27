@@ -20,6 +20,7 @@ class RobotMutation(Mutation):
 
                 wr = np.random.random()
 
+                
                 child = sn.states
 
                 old_states = child
@@ -59,7 +60,6 @@ class RobotMutation(Mutation):
                         child[num][2] = int(np.random.choice(duration_list))
 
                 sn.states = child
-
                 X[i, 0] = sn
 
         return X
