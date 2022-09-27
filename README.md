@@ -1,5 +1,5 @@
 <p align="center">
-	<img height="400px" src="logo.png"/>
+	<img height="500px" src="logo.png"/>
 </p>
 <h1 align="center">
 	AmbieGen Autonomous System Testing Framework
@@ -58,6 +58,18 @@ AmbieGen also supports the following algorithms:
 - ```ga``` - a singe-objective genetic algorithm, where the fitness is defined by the performace of the simplified model of the system under test on a given test case. The worse the performance, the better the fitness.
 - ```nsga2``` - a multi-objective genetic algorithm, where the first fitness function is defined by the performace of the simplified model of the system under test on a given test case and the second - by diversity of the test case, compared to the diversity of the 5 best solutions found.
 
-The implementation of the algorithms is based on the [Pymoo framework](https://pymoo.org/).
+The implementation of these algorithms is based on the [Pymoo framework](https://pymoo.org/).
 
-To set one of the systems under test, you can change the ```algo``` variable in the ```main``` function:
+To set one of the systems under test, you can change the ```algo``` variable in the ```main``` function.
+
+Finally, you can set the number of runs to perform by changing the ```runs_number```.   
+
+2. In the ```config.py``` file you can specify the parameters of algorithm in the ```ga``` section, as in the example:
+```python
+ga = {"pop_size": 50, "n_gen": 50, "mut_rate": 0.4, "cross_rate": 1}
+```
+Here the ```population size``` is set to 50, the ```number of generations``` to 50, the ```mutation rate``` to 0.4 and the ```crossover rate``` to 1.
+
+In the ```vehicle_env``` and ```robot_env``` sections you can specify the parameters of the system under test, such as the map size, the minimal and the maximal possible values of the attributes. An important parameter is ```elem_types``` which is used to calculate the novelty. It specifies the number of environmental elements types. For example, for autonomous vehicle we have 3 types of road segments: straight, left and right. So the ```elem_types``` is set to 3. For the robot we only have two types of elements: walls and empty space. So the ```elem_types``` is set to 2.
+
+In the ```files``` section you can specifies the folders to save the output files such as the statistics about the generated test cases (```stats_path```), the generated test cases (```tcs_path```) and the images of the generated test cases (```images_path```).
