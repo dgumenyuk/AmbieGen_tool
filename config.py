@@ -1,4 +1,4 @@
-ga = {"pop_size": 50, "n_gen": 50, "mut_rate": 0.4, "cross_rate": 1}
+ga = {"pop_size": 100, "n_gen": 100, "mut_rate": 0.4, "cross_rate": 1}
 
 vehicle_env = {
     "map_size": 200,

@@ -57,8 +57,8 @@ def main(problem, algo, runs_number, save_results=True, save_images=True):
 
 
 ################################## MAIN ########################################
-problem = "robot"
+problem = "vehicle"
 algo = "ga"
-runs_number = 3
+runs_number = 1
 if __name__ == "__main__":
-    main(problem, algo, runs_number, save_results=False, save_images=False)
+    main(problem, algo, runs_number)
