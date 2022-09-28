@@ -154,7 +154,7 @@ Our fameowork can be easily extended to support a new system to test. To do so, 
     ```
 
 ## Contributing
-Bug reports and pull requests are welcome on GitHub at [https://github.com/dgumenyuk/AmbieGen_tool](https://github.com/dgumenyuk/AmbieGen_tool).
+Bug reports and pull requests are welcome on GitHub at [https://github.com/dgumenyuk/AmbieGen_tool](https://github.com/dgumenyuk/AmbieGen_tool). If you have any questions, please contact me at dmytro.humeniuk@polymtl.ca.
 
 ## License
 This code is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).    
