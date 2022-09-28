@@ -9,7 +9,7 @@
   <b>Current Framework Version: 0.1.0</b>
 </p>
 
-[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/dwyl/esta/issues)
+[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/dgumenyuk/AmbieGen_tool/issues)
   [![HitCount](https://hits.dwyl.com/dgumenyuk/AmbieGen_tool.svg?style=flat-square&show=unique)](http://hits.dwyl.com/dgumenyuk/AmbieGen_tool)
 ![Code Grade](https://api.codiga.io/project/34688/score/svg)
 ![Code Grade](https://api.codiga.io/project/34688/status/svg)
