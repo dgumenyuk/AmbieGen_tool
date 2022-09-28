@@ -9,6 +9,10 @@
   <b>Current Framework Version: 0.1.0</b>
 </p>
 
+[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/dwyl/esta/issues)
+[![HitCount](https://hits.dwyl.com/dgumenyuk/AmbieGen_tool.svg?style=flat-square)](http://hits.dwyl.com/dgumenyuk/AmbieGen_tool)
+
+
 The framework, along with some initial results, is covered in the paper [A search-based framework for automatic generation of testing environments for cyber–physical systems](https://www.sciencedirect.com/science/article/pii/S0950584922000866). This paper should be cited if code from this project is used in any way:
 ```
 @article{HUMENIUK2022106936,
