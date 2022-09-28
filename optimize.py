@@ -1,15 +1,15 @@
-from pymoo.optimize import minimize
+from pymoo.termination import get_termination
+
 import config as cf
+from pymoo.optimize import minimize
 from ambiegen import ALRGORITHMS
 from ambiegen.problems import PROBLEMS
 from ambiegen.samplers import SAMPLERS
 from ambiegen.search_operators import OPERATORS
 from ambiegen.duplicate_elimination.duplicate_rem import DuplicateElimination
 from ambiegen.utils.random_seed import get_random_seed
-from pymoo.termination import get_termination
 from ambiegen.utils.get_stats import get_stats
 from ambiegen.utils.get_test_suite import get_test_suite
-import json
 from ambiegen.utils.save_tc_results import save_tc_results
 from ambiegen.utils.save_tcs_images import save_tcs_images
 
