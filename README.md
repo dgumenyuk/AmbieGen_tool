@@ -29,7 +29,7 @@ author = {Dmytro Humeniuk and Foutse Khomh and Giuliano Antoniol}
 ```
 ## Installation
 1. Clone this repository to your local machine.
-2. To install the dependencies needed to use the project, run `pip install -r requirements.txt` from inside the repository folder. 
+2. To install the dependencies needed to use the project, run `pip install -r requirements.txt` from inside the repository folder. Python 3.8 + is required.
 3. Now AmbieGen is ready to use. Check the [following section](https://github.com/dgumenyuk/AmbieGen_tool#usage) on how to use it.
 
 ## Usage
