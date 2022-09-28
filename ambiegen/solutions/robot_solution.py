@@ -70,17 +70,22 @@ class RobotSolution:
 
         return similarity
 
-    def calculate_novelty(self, state1, state2):
+    def calculate_novelty(self, tc1, tc2):
         """
-        novelty  = calc_novelty(old, new, "robot")
-        return -novelty
+        > The function calculates the novelty of two states by comparing the similarity of each element in
+        the two states
+        
+        :param state1: the current state of the robot
+        :param state2: the current state of the robot
+        :return: The novelty of the state.
         """
+
         similarity = 0
-        state_num = min(len(state1), len(state2))
+        state_num = min(len(tc1), len(tc2))
 
         total_states = state_num * cf.robot_env["elem_types"]
         for i in range(state_num):
-            similarity += self.compare_states(state1[i], state2[i])
+            similarity += self.compare_states(tc1[i], tc2[i])
 
         novelty = 1 - (similarity / total_states)
         return novelty
