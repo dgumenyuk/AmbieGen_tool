@@ -44,7 +44,7 @@ Here's of how to configure the tool to run the test case generation for autonomo
     ```
 3. Running the script will start the search algorithms for test case generation and provide the output of the search process in the form of the number of evaluations done, constraint violations and best solutions found.
 4. At the output, a test suite of the 30 test cases will be generated and saved in the configured folder in the ```config.py``` file. The additional information about the test suite, such as the fitness of each test case, the average diversity of the solutions as well as well as the convergence of the solutions (best solution found at each generation) will also be saved.
-5. More information about the avalable options can be found in the [next section](https://github.com/dgumenyuk/AmbieGen_tool#options).
+5. More information about the avalable options can be found in the [next section](https://github.com/dgumenyuk/AmbieGen_tool#options-and-parameters).
 
 ## Options and parameters
 1. In the ```optimize.py``` file you can specify the system under test, the algorithm to use and the number of runs to perform. 
