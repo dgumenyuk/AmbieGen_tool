@@ -10,7 +10,7 @@
 </p>
 
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/dwyl/esta/issues)
-[![HitCount](https://hits.dwyl.com/dgumenyuk/AmbieGen_tool.svg?style=flat-square)](http://hits.dwyl.com/dgumenyuk/AmbieGen_tool)
+  [![HitCount](https://hits.dwyl.com/dgumenyuk/AmbieGen_tool.svg?style=flat-square&show=unique)](http://hits.dwyl.com/dgumenyuk/AmbieGen_tool)
 ![Code Grade](https://api.codiga.io/project/34688/score/svg)
 ![Code Grade](https://api.codiga.io/project/34688/status/svg)
 
