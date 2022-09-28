@@ -278,7 +278,7 @@ def point_in_range(a):
     Returns:
       a boolean value.
     """
-    map_size = cf.model["map_size"]
+    map_size = cf.vehicle_env["map_size"]
     if ((4) < a[0] and a[0] < (map_size - 4)) and (
         (4) <= a[1] and a[1] < (map_size - 4)
     ):
